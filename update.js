@@ -18,7 +18,6 @@ export const main = handler(async function(event) {
         ReturnValues: "ALL_NEW"
     };
 
-    console.log(params);
     await dynamoDb.update(params);
     return { status: true };
 });
