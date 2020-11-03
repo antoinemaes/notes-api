@@ -1,0 +1,16 @@
+import handler from "./libs/handler-lib";
+import dynamoDb from "./libs/dynamodb-lib";
+
+export const main = handler(async function(event) {
+
+    const params = {
+        TableName: process.env.tableName,
+        Key: {
+            userId: event.requestContext.identity.cognitoIdentityId,
+            noteId: event.pathParameters.id
+        }
+    };
+
+    await dynamoDb.delete(params);
+    return { status: true };
+});
